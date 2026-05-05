@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>关于中年妇女的调查问卷 · 母亲节惊喜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #fde9e0 0%, #fbe4d8 100%);
+            font-family: 'Segoe UI', 'Roboto', 'Noto Sans', 'Helvetica Neue', system-ui, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            margin: 0;
+        }
+
+        .card {
+            max-width: 720px;
+            width: 100%;
+            background: rgba(255, 248, 245, 0.95);
+            backdrop-filter: blur(14px);
+            background: #fffaf7;
+            box-shadow: 0 30px 55px rgba(180, 120, 100, 0.2), 0 10px 25px rgba(160, 100, 80, 0.15);
+            border-radius: 42px;
+            padding: 2.5rem 2rem;
+            border: 1px solid rgba(255, 220, 200, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: "🌸";
+            position: absolute;
+            font-size: 110px;
+            top: -30px;
+            right: -20px;
+            opacity: 0.08;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .card::after {
+            content: "";
+            position: absolute;
+            bottom: -30px;
+            left: -30px;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255, 192, 150, 0.25) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            color: #7b4b3a;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 0 rgba(255, 210, 180, 0.3);
+        }
+
+        .question-block {
+            background: #ffffff;
+            border-radius: 26px;
+            padding: 1.3rem 1.6rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 8px 20px rgba(180, 130, 110, 0.12);
+            transition: all 0.15s ease;
+            border: 1px solid #ffeae0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .question-block:hover {
+            border-color: #efc4b0;
+            box-shadow: 0 12px 24px rgba(200, 130, 100, 0.18);
+            transform: translateY(-2px);
+        }
+
+        .q-title {
+            font-weight: 650;
+            font-size: 1.1rem;
+            color: #5d3a2e;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .q-num {
+            background: #f3c9b6;
+            color: white;
+            border-radius: 16px;
+            padding: 0.15rem 0.7rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 0.2rem;
+            white-space: nowrap;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            background: #fef9f6;
+            padding: 0.5rem 1rem;
+            border-radius: 18px;
+            transition: background 0.1s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .option-item:hover {
+            background: #ffede3;
+            border-color: #f5c7b0;
+        }
+
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 1.25rem;
+            height: 1.25rem;
+            border: 2px solid #cc9980;
+            border-radius: 50%;
+            margin: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: 0.15s;
+            background: white;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        input[type="radio"]:checked {
+            border-color: #af674b;
+            background: #af674b;
+            box-shadow: inset 0 0 0 3px white;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #4e3a30;
+            cursor: pointer;
+            flex: 1;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.85rem 1.2rem;
+            border: 2px dashed #e6bfaa;
+            border-radius: 20px;
+            font-size: 1rem;
+            background: #fffbf8;
+            outline: none;
+            transition: 0.2s;
+            margin-top: 0.4rem;
+            color: #4b3629;
+        }
+
+        .text-input:focus {
+            border-color: #b57860;
+            background: #fff5ef;
+            box-shadow: 0 0 0 4px rgba(230, 160, 120, 0.15);
+        }
+
+        .submit-wrapper {
+            display: flex;
+            justify-content: center;
+            margin: 2.2rem 0 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            background: #cb8b6f;
+            border: none;
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem;
+            padding: 0.9rem 3.2rem;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 14px 23px rgba(190, 110, 70, 0.3);
+            letter-spacing: 1.5px;
+            transition: all 0.25s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            background: linear-gradient(135deg, #cd8c6a, #b76b4c);
+            border: 1px solid #ffd3ba;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #da9776, #c07251);
+            box-shadow: 0 20px 30px rgba(170, 90, 50, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 8px 14px rgba(160, 80, 40, 0.3);
+        }
+
+        .footer-note {
+            text-align: center;
+            color: #b29384;
+            font-size: 0.85rem;
+            margin-top: 1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 1.8rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>关于中年妇女的调查问卷</h1>
+
+        <form id="momSurvey">
+            <!-- 第1题 年龄 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">1</span> 您的年龄？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q1" value="35岁以下" id="q1a" required><label for="q1a">35岁以下</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="35–40岁" id="q1b"><label for="q1b">35–40岁</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="41–45岁" id="q1c"><label for="q1c">41–45岁</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="46–50岁" id="q1d"><label for="q1d">46–50岁</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="51–55岁" id="q1e"><label for="q1e">51–55岁</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="56–60岁" id="q1f"><label for="q1f">56–60岁</label></div>
+                    <div class="option-item"><input type="radio" name="q1" value="60岁以上" id="q1g"><label for="q1g">60岁以上</label></div>
+                </div>
+            </div>
+
+            <!-- 第2题 最近购买商品类型 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">2</span> 您最近购买的商品主要属于什么类型？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q2" value="食品生鲜" id="q2a" required><label for="q2a">食品生鲜</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="服装鞋帽" id="q2b"><label for="q2b">服装鞋帽</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="美妆个护" id="q2c"><label for="q2c">美妆个护</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="母婴用品" id="q2d"><label for="q2d">母婴用品</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="家居家电" id="q2e"><label for="q2e">家居家电</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="数码产品" id="q2f"><label for="q2f">数码产品</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="医疗保健" id="q2g"><label for="q2g">医疗保健</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="教育培训" id="q2h"><label for="q2h">教育培训</label></div>
+                    <div class="option-item"><input type="radio" name="q2" value="其他" id="q2i"><label for="q2i">其他</label></div>
+                </div>
+            </div>
+
+            <!-- 第3题 经济水平看法 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">3</span> 您对您现在的经济水平看法如何？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q3" value="非常宽裕，完全可以满足需求" id="q3a" required><label for="q3a">非常宽裕，完全可以满足需求</label></div>
+                    <div class="option-item"><input type="radio" name="q3" value="比较宽裕，基本没有压力" id="q3b"><label for="q3b">比较宽裕，基本没有压力</label></div>
+                    <div class="option-item"><input type="radio" name="q3" value="大致够用，收支基本平衡" id="q3c"><label for="q3c">大致够用，收支基本平衡</label></div>
+                    <div class="option-item"><input type="radio" name="q3" value="有些紧张，需要精打细算" id="q3d"><label for="q3d">有些紧张，需要精打细算</label></div>
+                    <div class="option-item"><input type="radio" name="q3" value="非常困难，入不敷出" id="q3e"><label for="q3e">非常困难，入不敷出</label></div>
+                </div>
+            </div>
+
+            <!-- 第4题 最近一次购物为谁 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">4</span> 您最近一次购物主要是为了谁？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q4" value="为自己" id="q4a" required><label for="q4a">为自己</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="为配偶/伴侣" id="q4b"><label for="q4b">为配偶/伴侣</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="为孩子" id="q4c"><label for="q4c">为孩子</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="为父母/长辈" id="q4d"><label for="q4d">为父母/长辈</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="为朋友/同事" id="q4e"><label for="q4e">为朋友/同事</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="为家庭公用" id="q4f"><label for="q4f">为家庭公用</label></div>
+                    <div class="option-item"><input type="radio" name="q4" value="其他" id="q4g"><label for="q4g">其他</label></div>
+                </div>
+            </div>
+
+            <!-- 第5题 填空：喜欢却没买的商品 (唯一非选择题) -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">5</span> 最近您有喜欢却因为各种因素而没有购买的商品吗？如有，请写出具体商品名称。</div>
+                <input type="text" class="text-input" name="q5" placeholder="例如：真丝睡衣、颈椎按摩仪、化妆品......" autocomplete="off">
+            </div>
+
+            <!-- 第6题 幸福感 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">6</span> 您感到幸福吗对于您现在的生活？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q6" value="非常幸福" id="q6a" required><label for="q6a">非常幸福</label></div>
+                    <div class="option-item"><input type="radio" name="q6" value="比较幸福" id="q6b"><label for="q6b">比较幸福</label></div>
+                    <div class="option-item"><input type="radio" name="q6" value="一般" id="q6c"><label for="q6c">一般</label></div>
+                    <div class="option-item"><input type="radio" name="q6" value="不太幸福" id="q6d"><label for="q6d">不太幸福</label></div>
+                    <div class="option-item"><input type="radio" name="q6" value="很不幸福" id="q6e"><label for="q6e">很不幸福</label></div>
+                </div>
+            </div>
+
+            <!-- 第7题 个人消费占比 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">7</span> 您每月在个人消费（如服饰、美容、兴趣爱好等）上的支出，大约占您月收入的多少？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q7" value="10%以下" id="q7a" required><label for="q7a">10%以下</label></div>
+                    <div class="option-item"><input type="radio" name="q7" value="10%–20%" id="q7b"><label for="q7b">10%–20%</label></div>
+                    <div class="option-item"><input type="radio" name="q7" value="20%–30%" id="q7c"><label for="q7c">20%–30%</label></div>
+                    <div class="option-item"><input type="radio" name="q7" value="30%–50%" id="q7d"><label for="q7d">30%–50%</label></div>
+                    <div class="option-item"><input type="radio" name="q7" value="50%以上" id="q7e"><label for="q7e">50%以上</label></div>
+                </div>
+            </div>
+
+            <!-- 第8题 最希望改善的方面 -->
+            <div class="question-block">
+                <div class="q-title"><span class="q-num">8</span> 眼下，您最希望得到改善的方面是什么？</div>
+                <div class="options">
+                    <div class="option-item"><input type="radio" name="q8" value="提高收入与经济保障" id="q8a" required><label for="q8a">提高收入与经济保障</label></div>
+                    <div class="option-item"><input type="radio" name="q8" value="改善家庭关系与陪伴质量" id="q8b"><label for="q8b">改善家庭关系与陪伴质量</label></div>
+                    <div class="option-item"><input type="radio" name="q8" value="提升身体健康与精力" id="q8c"><label for="q8c">提升身体健康与精力</label></div>
+                    <div class="option-item"><input type="radio" name="q8" value="发展个人兴趣或事业" id="q8d"><label for="q8d">发展个人兴趣或事业</label></div>
+                    <div class="option-item"><input type="radio" name="q8" value="减轻家务与照料负担" id="q8e"><label for="q8e">减轻家务与照料负担</label></div>
+                    <div class="option-item"><input type="radio" name="q8" value="其他" id="q8f"><label for="q8f">其他</label></div>
+                </div>
+            </div>
+
+            <div class="submit-wrapper">
+                <button type="submit" class="btn">🌸 提交 🌸</button>
+            </div>
+            <div class="footer-note">感谢您在百忙之中填写问卷调查</div>
+        </form>
+    </div>
+
+    <script>
+        (function() {
+            const form = document.getElementById('momSurvey');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const formData = new FormData(form);
+                const answers = {};
+                for (let [key, value] of formData.entries()) {
+                    if (value.trim() === '') continue;
+                    answers[key] = value.trim();
+                }
+
+                console.log('🌸 母亲节问卷答案（秘密情报）:');
+                console.table(answers);
+
+                alert('💖 收到啦！感谢妈妈的填写');
+                form.reset();
+            });
+        })();
+    </script>
+</body>
+</html>
